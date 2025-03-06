@@ -1,65 +1,58 @@
-IT Asset Management Application
+# IT Asset Management Application
 
- 
+## 📌 Overview
 
-📌 Overview
+This project is an **IT Asset Management Application** that retrieves information from network cards and performs connectivity tests. It is designed to help IT administrators monitor and manage network assets efficiently.
 
-This project is an IT Asset Management Application that retrieves information from network cards and performs connectivity tests. It is designed to help IT administrators monitor and manage network assets efficiently.
+## 🚀 Features
 
-🚀 Features
+- **Computer and Network Card Data Entry**: Users can manually enter computer and network card details and store them in a list.
+- **Display Registered Computers**: The list of entered computers is displayed in a table.
+- **Reset Functionality**: A "Reset" button allows users to clear the input fields.
+- **Export Data**: The list of computers can be exported to a text file.
+- **Retrieve Network Address**: Once a client and its network card are registered, the application can display the network address.
+- **Connectivity Testing**: Users can perform a **ping test** on a network card using its IP address.
+- **Import Computer List**: Users can import a list of computers from a text file.
+- **Retrieve MAC Address**: Users can retrieve the MAC address corresponding to an IP address using the `arp.exe -a` command.
 
-Network Card Information Retrieval: Extracts details about network interfaces, including MAC addresses, IP configurations, and statuses.
-
-Connectivity Tests: Performs ping and other network reachability tests to assess connectivity.
-
-Logging and Reporting: Stores network data for analysis and auditing.
-
-User-Friendly Interface: Provides a simple and clear way to visualize network information.
-
-🛠️ Installation
+## 🛠️ Installation
 
 To install and run the application, follow these steps:
 
-Clone the repository:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
 
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+## 📂 Project Structure
 
-Install dependencies:
-
-pip install -r requirements.txt
-
-Run the application:
-
-python main.py
-
-📂 Project Structure
-
+TO DO
+```
 📁 your-repo/
 │── 📁 src/              # Source code
 │── 📁 tests/            # Unit tests
 │── 📄 requirements.txt  # Dependencies
 │── 📄 README.md         # Project documentation
 │── 📄 LICENSE           # License information
+```
 
-✅ Usage
+## ✅ Usage
 
-Launch the application and enter the network card details.
+- Enter computer and network card details manually.
+- View registered computers in a table.
+- Use the reset button to clear input fields.
+- Export the list of computers to a text file.
+- Retrieve the network address of registered clients.
+- Perform a ping test on a registered IP address.
+- Import a list of computers from a file.
+- Retrieve the MAC address linked to an IP address.
 
-Run connectivity tests to check the status of network devices.
+## 🤝 Contributions
 
-View logs and reports for further analysis.
+Paul-Loup Germain
+Diego Da-Silva
 
-🤝 Contributions
+## 📜 License
 
-Contributions are welcome! Feel free to submit pull requests or report issues.
-
-📜 License
-
-This project is licensed under the MIT License.
-
-📬 Contact
-
-For any inquiries or suggestions, reach out via [your email or GitHub issues].
-
-🌐 Simplifying IT Asset Management!
+This project is licensed under the **MIT License**.
