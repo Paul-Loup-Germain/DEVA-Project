@@ -4,6 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+
+import static ch.etmles.srs.buisness.NetworkCard.ping;
+
 public class ComputerMngtController {
 
     @FXML
@@ -13,8 +17,9 @@ public class ComputerMngtController {
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-            welcomeText.setText("Hello");
+    protected void onHelloButtonClick() throws IOException {
+        String ip = "10.228.158.138";
+        welcomeText.setText(ping(ip));
     }
 
 }

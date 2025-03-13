@@ -6,9 +6,9 @@
 
 package ch.etmles.srs.buisness;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class NetworkCard {
     
@@ -112,9 +112,18 @@ public class NetworkCard {
         // Convertir le tableau d'entiers en une chaîne de caractères
         String broadcast = convertTabIntIntoString(broadcastTab);
         return broadcast;
-
     }
-   
+
+    public static String ping(String ipAddress) throws IOException, UnknownHostException {
+        String result = "";
+        InetAddress geek = InetAddress.getByName(ipAddress);
+        if (geek.isReachable(5000))
+            result = "Host is reachable";
+        else
+            result = "Sorry ! We can't reach to this host";
+
+        return result;
+    }
 }
 
 
