@@ -21,20 +21,25 @@ To install and run the application, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/Paul-Loup-Germain/DEVA-Project.git
    ```
 
 ## 📂 Project Structure
 
-TO DO
 ```
-📁 your-repo/
-│── 📁 src/              # Source code
-│── 📁 tests/            # Unit tests
-│── 📄 requirements.txt  # Dependencies
-│── 📄 README.md         # Project documentation
-│── 📄 LICENSE           # License information
+📁 DEVA-Project/
+│── 📁 JavaFXComputerApplication/                         # Project
+    │── 📁 src/                                           # Source code
+        │── 📁 main/                                      # Source code
+            │── 📁 java/ch.etmles.srs/buisness            # Code application
+                │── 📄 Computer.java
+                │── 📄 NetworkCard.java                            
+            │── 📁 java/ch.etmles.srs/view                # Code interface
+                │── 📄 ComputerMngtApplication.java
+                │── 📄 ComputerMngtController.java   
+        │── 📁 test/                                      # Unit test
+│── 📄 .gitignore                                         # file ignore
+│── 📄 README.md                                          # Project documentation
 ```
 
 ## ✅ Usage
@@ -50,8 +55,7 @@ TO DO
 
 ## 🤝 Contributions
 
-Paul-Loup Germain
-Diego Da-Silva
+Paul-Loup Germain & Diego Da-Silva
 
 ## 📜 License
 
