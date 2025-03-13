@@ -6,6 +6,10 @@
 
 package ch.etmles.srs.buisness;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class NetworkCard {
     
     // Attributs
@@ -109,7 +113,7 @@ public class NetworkCard {
         String broadcast = convertTabIntIntoString(broadcastTab);
         return broadcast;
 
-    } 
+    }
    
 }
 
