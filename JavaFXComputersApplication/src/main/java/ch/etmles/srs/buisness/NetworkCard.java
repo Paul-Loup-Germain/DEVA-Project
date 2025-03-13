@@ -114,10 +114,13 @@ public class NetworkCard {
         return broadcast;
     }
 
+    // ********************************************************************
+    // Méthode permettant de ping un host distant
+    // ********************************************************************
     public static String ping(String ipAddress) throws IOException, UnknownHostException {
         String result = "";
-        InetAddress geek = InetAddress.getByName(ipAddress);
-        if (geek.isReachable(5000))
+        InetAddress hostIP = InetAddress.getByName(ipAddress);
+        if (hostIP.isReachable(5000))
             result = "Host is reachable";
         else
             result = "Sorry ! We can't reach to this host";
