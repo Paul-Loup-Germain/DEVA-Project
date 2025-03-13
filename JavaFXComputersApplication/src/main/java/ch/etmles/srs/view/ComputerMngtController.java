@@ -1,6 +1,5 @@
 package ch.etmles.srs.view;
 
-import ch.etmles.srs.buisness.Computer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
