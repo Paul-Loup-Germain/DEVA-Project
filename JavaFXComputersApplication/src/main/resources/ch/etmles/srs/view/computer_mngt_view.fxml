@@ -3,13 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +21,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -58,8 +58,8 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField prefHeight="25.0" prefWidth="76.0" GridPane.columnIndex="1" />
-                        <TextField prefHeight="25.0" prefWidth="124.0" GridPane.columnIndex="4" />
+                        <TextField fx:id="txtName" prefHeight="25.0" prefWidth="76.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtModel" prefHeight="25.0" prefWidth="124.0" GridPane.columnIndex="4" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="61.0" text="Nom " textAlignment="CENTER">
                            <font>
                               <Font size="13.0" />
@@ -94,7 +94,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="138.0" text="Mémoire vive (RAM)" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="127.0" text="Mémoire vive (Go)" textAlignment="CENTER">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -102,11 +102,14 @@
                               <Insets />
                            </opaqueInsets>
                         </Label>
-                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="33.0" text="8" GridPane.columnIndex="1" />
-                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="42.0" text="16" GridPane.columnIndex="2" />
-                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="41.0" text="32" GridPane.columnIndex="3" />
-                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="42.0" text="64" GridPane.columnIndex="4" />
-                        <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="46.0" text="128" GridPane.columnIndex="5" />
+                        <RadioButton fx:id="rbRAM8" mnemonicParsing="false" prefHeight="17.0" prefWidth="33.0" selected="true" text="8" GridPane.columnIndex="1">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tgRAMqty" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="rbRAM16" mnemonicParsing="false" prefHeight="17.0" prefWidth="42.0" text="16" toggleGroup="$tgRAMqty" GridPane.columnIndex="2" />
+                        <RadioButton fx:id="rbRAM32" mnemonicParsing="false" prefHeight="17.0" prefWidth="41.0" text="32" toggleGroup="$tgRAMqty" GridPane.columnIndex="3" />
+                        <RadioButton fx:id="rbRAM64" mnemonicParsing="false" prefHeight="17.0" prefWidth="42.0" text="64" toggleGroup="$tgRAMqty" GridPane.columnIndex="4" />
+                        <RadioButton fx:id="rbRAM128" mnemonicParsing="false" prefHeight="17.0" prefWidth="46.0" text="128" toggleGroup="$tgRAMqty" GridPane.columnIndex="5" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" />
@@ -130,7 +133,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <Slider blockIncrement="0.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefHeight="38.0" prefWidth="80.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" />
+                        <Slider fx:id="spNbCores" blockIncrement="0.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefHeight="38.0" prefWidth="80.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
@@ -155,7 +158,7 @@
                               <Insets />
                            </opaqueInsets>
                         </Label>
-                        <TextField prefHeight="25.0" prefWidth="76.0" GridPane.columnIndex="2" />
+                        <TextField fx:id="txtStorage" prefHeight="25.0" prefWidth="76.0" GridPane.columnIndex="2" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
@@ -180,8 +183,8 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
                         <ImageView fitHeight="63.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                        <ComboBox fx:id="cbOSChoice" onAction="#onCbOsChoice" prefWidth="150.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="479.0" text="Caractéristique réseau" textAlignment="CENTER" underline="true">
@@ -213,19 +216,19 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtAddIpAdress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="66.0" text="Masque" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="4" />
+                        <TextField fx:id="txtAddMask" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="4" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </GridPane>
-                  <GridPane>
+                  <GridPane fx:id="lbl">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="97.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="346.0" />
@@ -236,7 +239,7 @@
                     </rowConstraints>
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="88.0" text="Adresse MAC" textAlignment="CENTER" />
-                        <TextField prefHeight="25.0" prefWidth="363.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtAddMacAdress" prefHeight="25.0" prefWidth="363.0" GridPane.columnIndex="1" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" />
@@ -247,19 +250,19 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="19.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="163.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="156.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="108.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="41.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="109.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="38.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="110.0" text="Ajouter" GridPane.columnIndex="1">
+                        <Button fx:id="btnAddComputer" mnemonicParsing="false" onAction="#onAddButtonClick" prefHeight="56.0" prefWidth="110.0" text="Ajouter" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" text="Réinitialiser" GridPane.columnIndex="3" />
+                        <Button fx:id="btnResetValue" mnemonicParsing="false" onAction="#onResetButtonClick" prefHeight="30.0" prefWidth="118.0" text="Réinitialiser" GridPane.columnIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -285,17 +288,17 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="115.0" text="Button" textAlignment="CENTER">
+                        <Button fx:id="btnImport" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onImportButtonClick" prefHeight="27.0" prefWidth="115.0" text="Importer" textAlignment="CENTER">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" text="Button" textAlignment="CENTER" GridPane.columnIndex="1">
+                        <Button fx:id="btnEdit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditButtonClick" prefHeight="27.0" prefWidth="116.0" text="Modifier" textAlignment="CENTER" GridPane.columnIndex="1">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Button" textAlignment="CENTER" GridPane.columnIndex="2">
+                        <Button fx:id="btnExport" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onExportButtonClick" prefHeight="27.0" prefWidth="113.0" text="Exporter" textAlignment="CENTER" GridPane.columnIndex="2">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -332,13 +335,13 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtConfigurationPc" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="66.0" text="Masque" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="4" />
+                        <TextField fx:id="txtConfigurationMask" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="4" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
@@ -355,7 +358,7 @@
                      </rowConstraints>
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="91.0" text="Adresse MAC" textAlignment="CENTER" />
-                        <TextField prefHeight="25.0" prefWidth="363.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtConfigurationMacAdress" prefHeight="25.0" prefWidth="363.0" GridPane.columnIndex="1" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="91.0" text="Adresse MAC" textAlignment="CENTER" />
                      </children>
                      <opaqueInsets>
@@ -370,23 +373,22 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="19.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="163.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="68.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="140.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="156.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="108.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="41.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="98.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="38.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="110.0" text="Ping" GridPane.columnIndex="1">
+                        <Button fx:id="btnPing" mnemonicParsing="false" onAction="#onPingButtonClick" prefHeight="56.0" prefWidth="110.0" text="Ping" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" text="Sous-Réseau" GridPane.columnIndex="5" />
-                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" />
-                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" />
+                        <Button fx:id="btnSubnet" mnemonicParsing="false" onAction="#onCalculateSubnetButtonClick" prefHeight="30.0" prefWidth="111.0" text="Sous-Réseau" GridPane.columnIndex="4" />
+                        <Circle fx:id="clePingSucces" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" />
+                        <Circle fx:id="clePingFailed" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -416,9 +418,9 @@
                      <children>
                         <Label text="Adresse MAC" GridPane.rowIndex="1" />
                         <Label prefHeight="17.0" prefWidth="117.0" text="Adrese IP souhaitée" />
-                        <TextField prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
-                        <TextField prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="112.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtGetIpAdress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtGetMacAddress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="btnGetMac" mnemonicParsing="false" onAction="#onGetButtonClick" prefHeight="32.0" prefWidth="112.0" text="Récupérer" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
