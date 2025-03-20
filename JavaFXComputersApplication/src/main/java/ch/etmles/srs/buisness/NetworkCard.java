@@ -6,9 +6,13 @@
 
 package ch.etmles.srs.buisness;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NetworkCard {
     
@@ -121,10 +125,33 @@ public class NetworkCard {
         String result = "";
         InetAddress hostIP = InetAddress.getByName(ipAddress);
         if (hostIP.isReachable(5000))
-            result = "Host is reachable";
+            result = "OKE";
         else
-            result = "Sorry ! We can't reach to this host";
+            result = "NOT OKE";
 
+        return result;
+    }
+
+    public static String getMACAddress(String ipAddress) {
+        String result = null;
+        try {
+            // Exécute la commande "arp -a" sous Windows ou "arp -n" sous Linux/Mac
+            ProcessBuilder pb = new ProcessBuilder("arp", "-a");
+            Process process = pb.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            Pattern pattern = Pattern.compile(ipAddress + "\\s+([\\w\\-:]+)"); // Regex pour extraire la MAC de l'IP
+
+            while ((line = reader.readLine()) != null) {
+                Matcher matcher = pattern.matcher(line);
+                if (matcher.find()) {
+                    result = "IP: " + ipAddress + " -> MAC: " + matcher.group(1);
+                }
+            }
+        } catch (Exception e) {
+
+        }
         return result;
     }
 }
