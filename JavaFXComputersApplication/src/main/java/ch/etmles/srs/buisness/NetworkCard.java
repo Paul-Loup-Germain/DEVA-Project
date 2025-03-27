@@ -43,18 +43,22 @@ public class NetworkCard {
     // Méthode permettant de convertir une adresse ou un
     // masque en un tableau de 4 entiers
     // ********************************************************************
+    // ********************************************************************
+    // Méthode permettant de convertir une adresse ou un
+    // masque en un tableau de 4 entiers
+    // ********************************************************************
     private int[] convertStringIntoTabInt(String str) {
         // DÃ©claration d'un tableau d'entiers
         int[] tab = new int[4];
         String[] strParts = str.split("[.]");
-        
+
         // Conversion de chaque partie de la chaÃ®ne en nombre entier
         for (int i = 0; i < strParts.length; i++) {
             tab[i] = Integer.parseInt(strParts[i]);
         }
         return tab;
     }
-    
+
     // ********************************************************************
     // Méthode permettant de convertir un tableau de 4 entiers en une 
     // chaîne de caractères contenant une adresse
@@ -71,24 +75,32 @@ public class NetworkCard {
         return address;
     }
 
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public void setMask(String mask) {
+        this.mask = mask;
+    }
+
     // ********************************************************************
     // Méthode permettant de calculer l'adresse du sous-réseau
     // ********************************************************************
     public String getSubNetAddress(){
-        
+
         // Séparer les éléments de l'adresse ip
         int[] ipAddressTab = convertStringIntoTabInt(ipAddress);
-        
+
         // Séparer les éléments du masque
         int[] maskTab = convertStringIntoTabInt(mask);
-        
+
         // Créer un tableau permettant de stocker le résultat
         int[] ipNetTab = new int[4];
         for (int i = 0; i < ipAddressTab.length; i++) {
             // Construire la nouvelle adresse
             ipNetTab[i] = ipAddressTab[i] & maskTab[i];
         }
-        
+
         // Convertir le tableau d'entiers en une chaîne de caractères
         String addressNet = convertTabIntIntoString(ipNetTab);
         return addressNet;
@@ -125,9 +137,9 @@ public class NetworkCard {
         String result = "";
         InetAddress hostIP = InetAddress.getByName(ipAddress);
         if (hostIP.isReachable(5000))
-            result = "OKE";
+            result = "Joiniable";
         else
-            result = "NOT OKE";
+            result = "Inaccessible";
 
         return result;
     }
@@ -146,7 +158,7 @@ public class NetworkCard {
             while ((line = reader.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()) {
-                    result = "IP: " + ipAddress + " -> MAC: " + matcher.group(1);
+                    result = matcher.group(1);
                 }
             }
         } catch (Exception e) {
@@ -154,6 +166,8 @@ public class NetworkCard {
         }
         return result;
     }
+
+
 }
 
 

@@ -1,6 +1,7 @@
 module ch.etmles.srs.buisness {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens ch.etmles.srs.buisness to javafx.fxml;
