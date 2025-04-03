@@ -54,6 +54,9 @@ import java.net.URL;
 // Contient des données localisées, par exemple pour afficher du texte dans différentes langues.
 import java.util.ResourceBundle;
 
+// Importe la classe Image de JavaFX pour pouvoir afficher ou manipuler des images dans l'interface graphique.
+import javafx.scene.image.Image;
+
 public class ComputerMngtController implements Initializable {
 
     // Déclaration des champs fxml
@@ -78,6 +81,7 @@ public class ComputerMngtController implements Initializable {
     @FXML private TableColumn<Computer, String> colStockage;
     @FXML private TableColumn<Computer, String> colCpu;
     @FXML private TableColumn<Computer, String> colOs;
+    @FXML private javafx.scene.image.ImageView imgOsChoice;
 
     // Liste observable contenant des objets Computer.
     // Elle permet de mettre à jour automatiquement l'interface JavaFX quand la liste change (ajout, suppression, etc.).
@@ -92,10 +96,7 @@ public class ComputerMngtController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // Ajoute des options dans une liste déroulante (ComboBox) appelée cbOSChoice
-        cbOSChoice.getItems().addAll("Windows", "MacOS", "Linux");
-
-        // Définit la valeur sélectionnée par défaut dans la ComboBox
-        cbOSChoice.setValue("Windows");
+        cbOSChoice.getItems().addAll("Linux", "Windows", "MacOS");
 
         // Associe les colonnes de la table à la propriété de la classe coputer de chaque objet affiché
         colNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -435,6 +436,48 @@ public class ComputerMngtController implements Initializable {
 
         // Lance la pause. L’action définie juste au-dessus s'exécutera automatiquement après 5 secondes
         pause.play();
+    }
+
+    // ********************************************************************
+    // Méthode appelée lorsqu’un élément est sélectionné dans une ComboBox (cbOSChoice)
+    // ********************************************************************
+    public void onCbOsChoice(ActionEvent event) {
+        // Récupère l’option choisie (par exemple "Linux", "Windows", "MacOS")
+        String selectedOs = cbOSChoice.getValue();
+
+        // Si rien n’est sélectionné (valeur nulle), on quitte la méthode
+        if (selectedOs == null) return;
+
+        // Selon le système choisi, on associe le nom d’une image spécifique
+        String imageName = switch (selectedOs) {
+            case "Linux" -> "ImageLinux.png";
+            case "Windows" -> "ImageWindows.png";
+            case "MacOS" -> "ImageMacOS.png";
+            default -> null; // Si aucun des cas ne correspond, aucune image
+        };
+
+        // Si un nom d’image a bien été trouvé (donc pas null)
+        if (imageName != null) {
+            // Construit le chemin de l’image à partir du dossier dans "resources"
+            // Ce chemin commence par un "/" car on l’utilise avec getResourceAsStream
+            String imagePath = "/images/" + imageName;
+
+            // Essaie de charger le fichier image sous forme de flux de données
+            InputStream stream = getClass().getResourceAsStream(imagePath);
+
+            // Si l’image n’a pas été trouvée à ce chemin, on affiche un message d’erreur
+            if (stream == null) {
+                System.out.println(" Image non trouvée à : " + imagePath);
+                imgOsChoice.setImage(null); // On vide l’image affichée si absente
+                return; // On arrête ici car on ne peut pas afficher l’image
+            }
+
+            // Si le flux de l’image est valide, on crée une image JavaFX avec ce flux
+            Image image = new Image(stream);
+
+            // On affiche l’image dans le composant graphique prévu à cet effet (imgOsChoice)
+            imgOsChoice.setImage(image);
+        }
     }
 
     // ********************************************************************

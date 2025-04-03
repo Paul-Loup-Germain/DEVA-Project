@@ -184,8 +184,8 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="63.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                        <ComboBox fx:id="cbOSChoice" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <ImageView fx:id="imgOsChoice" fitHeight="63.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                        <ComboBox fx:id="cbOSChoice" onAction="#onCbOsChoice" prefWidth="150.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="479.0" text="Caractéristique réseau" textAlignment="CENTER" underline="true">
