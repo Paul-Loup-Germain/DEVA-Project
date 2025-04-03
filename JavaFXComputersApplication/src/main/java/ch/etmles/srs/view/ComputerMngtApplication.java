@@ -1,3 +1,8 @@
+// ********************************************************************
+// Auteur : Paul-Loup Germain & Diego Da Sylva
+// Description : Classe Application
+// ********************************************************************
+
 package ch.etmles.srs.view;
 
 import javafx.application.Application;
@@ -12,7 +17,7 @@ public class ComputerMngtApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ComputerMngtApplication.class.getResource("computer_mngt_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 875, 775);
-        stage.setTitle("Hello!");
+        stage.setTitle("Computer");
         stage.setScene(scene);
         stage.show();
     }

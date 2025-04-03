@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -184,7 +185,7 @@
                            </font>
                         </Label>
                         <ImageView fitHeight="63.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                        <ComboBox fx:id="cbOSChoice" onAction="#onCbOsChoice" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cbOSChoice" prefWidth="150.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="479.0" text="Caractéristique réseau" textAlignment="CENTER" underline="true">
@@ -255,12 +256,40 @@
             </VBox>
             <VBox layoutX="482.0" layoutY="6.0" prefHeight="746.0" prefWidth="354.0">
                <children>
-                  <TableView prefHeight="715.0" prefWidth="354.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
+                   <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+                       <columns>
+                           <TableColumn fx:id="colNom" text="Nom">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="nom" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="colModele" text="Modèle">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="modele" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="colRam" text="RAM">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="ram" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="colStockage" text="Stockage">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="stockage" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="colCpu" text="CPU">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="cpu" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="colOs" text="OS">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="os" />
+                               </cellValueFactory>
+                           </TableColumn>
+                       </columns>
+                   </TableView>
                   <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="117.0" />
