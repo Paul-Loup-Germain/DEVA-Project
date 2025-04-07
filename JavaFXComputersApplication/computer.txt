@@ -1,2 +1,3 @@
-rthrzh;tzjtzj;32;3;456;Option 2
-trhth;rthrth;16;2;456;Option 3
+Apple;MacbookPro;32;2;1024;MacOS
+Lenovo;T14s;16;1;512;Linux
+Dell;Inspiration;16;1;512;Windows

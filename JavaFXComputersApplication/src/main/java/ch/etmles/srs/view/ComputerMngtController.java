@@ -489,6 +489,10 @@ public class ComputerMngtController implements Initializable {
         txtStorage.clear();
         txtAddIpAddress.clear();
         txtAddMask.clear();
+        rbRAM8.setSelected(true);
+        spNbCores.setValue(1);
+        cbOSChoice.setValue(null);
+        imgOsChoice.setImage(null);
     }
 
     // ********************************************************************
