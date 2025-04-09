@@ -16,9 +16,11 @@ class ComputerTest {
         int nbProcessors = 4;
         int HDD = 512;
         String OS = "Windows 10";
+        String ip = "192.168.1.1";
+        String mask = "255.255.255.0";
 
         // WHEN
-        Computer computer = new Computer(name, model, memory, nbProcessors, HDD, OS);
+        Computer computer = new Computer(name, model, memory, nbProcessors, HDD, OS, ip, mask);
 
         // THEN
         assertEquals(name, computer.getName(), "Le nom devrait correspondre à la valeur initialisée");
@@ -33,7 +35,7 @@ class ComputerTest {
     @Test
     public void testSetters() {
         // GIVEN
-        Computer computer = new Computer("PC1", "Model1", 8, 2, 256, "Linux");
+        Computer computer = new Computer("PC1", "Model1", 8, 2, 256, "Linux", "10.10.10.10", "255.255.255.0");
 
         // WHEN
         computer.setName("PC2");
