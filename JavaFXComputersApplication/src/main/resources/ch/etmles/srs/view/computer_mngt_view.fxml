@@ -23,11 +23,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.etmles.srs.view.ComputerMngtController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.etmles.srs.view.ComputerMngtController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="8.0" prefHeight="690.0" prefWidth="848.0">
+      <AnchorPane layoutX="10.0" layoutY="8.0" prefHeight="586.0" prefWidth="848.0">
          <children>
-            <VBox fx:id="vboxPanConfiguration" cache="true" focusTraversable="true" layoutY="-6.0" prefHeight="417.0" prefWidth="479.0" AnchorPane.topAnchor="-6.0">
+            <VBox fx:id="vboxPanConfiguration" cache="true" focusTraversable="true" layoutY="-6.0" prefHeight="363.0" prefWidth="479.0" AnchorPane.topAnchor="-6.0">
                <effect>
                   <Blend mode="MULTIPLY" />
                </effect>
@@ -188,17 +188,6 @@
                         <ComboBox fx:id="cbOSChoice" onAction="#onCbOsChoice" prefWidth="150.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="479.0" text="Caractéristique réseau" textAlignment="CENTER" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="25.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </Label>
                   <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="85.0" />
@@ -226,7 +215,7 @@
                         <TextField fx:id="txtAddMask" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="4" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets bottom="5.0" top="15.0" />
                      </VBox.margin>
                   </GridPane>
                   <GridPane prefHeight="30.0" prefWidth="379.0">
@@ -248,15 +237,18 @@
                         </Button>
                         <Button fx:id="btnResetValue" mnemonicParsing="false" onAction="#onResetButtonClick" prefHeight="30.0" prefWidth="118.0" text="Réinitialiser" GridPane.columnIndex="3" />
                      </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </GridPane>
                </children>
                <opaqueInsets>
                   <Insets top="25.0" />
                </opaqueInsets>
             </VBox>
-            <VBox layoutX="482.0" layoutY="6.0" prefHeight="746.0" prefWidth="354.0">
+            <VBox layoutX="482.0" layoutY="6.0" prefHeight="574.0" prefWidth="354.0">
                <children>
-                   <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+                   <TableView fx:id="tableView" prefHeight="539.0" prefWidth="354.0">
                        <columns>
                            <TableColumn fx:id="colNom" text="Nom">
                                <cellValueFactory>
@@ -319,38 +311,8 @@
                   </GridPane>
                </children>
             </VBox>
-            <VBox layoutX="1.0" layoutY="454.0" prefHeight="162.0" prefWidth="479.0">
+            <VBox layoutX="1.0" layoutY="386.0" prefHeight="63.0" prefWidth="479.0">
                <children>
-                  <GridPane>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="85.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="106.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="6.0" prefWidth="17.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="71.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="104.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="24.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="77.0" text="Adresse IP" textAlignment="CENTER">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtIPAddressConfiguration" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="66.0" text="Masque" textAlignment="CENTER" GridPane.columnIndex="3">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtConfigurationMask" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="4" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </GridPane>
                   <GridPane prefHeight="30.0" prefWidth="379.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="19.0" />
@@ -378,9 +340,9 @@
                   </GridPane>
                </children>
             </VBox>
-            <VBox layoutX="2.0" layoutY="616.0" prefHeight="146.0" prefWidth="465.0">
+            <VBox layoutX="8.0" layoutY="449.0" prefHeight="146.0" prefWidth="465.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="465.0" text="Récupération de l'adresse MAC" textAlignment="CENTER" underline="true">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="465.0" text="Récupération de l'adresse MAC" textAlignment="CENTER" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -399,7 +361,7 @@
                     </rowConstraints>
                      <children>
                         <Label text="Adresse MAC" GridPane.rowIndex="1" />
-                        <Label prefHeight="17.0" prefWidth="117.0" text="Adrese IP souhaitée" />
+                        <Label prefHeight="17.0" prefWidth="117.0" text="Adresse IP" />
                         <TextField fx:id="txtGetIpAddress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
                         <TextField fx:id="txtGetMacAddress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button fx:id="btnGetMac" mnemonicParsing="false" onAction="#onGetButtonClickMac" prefHeight="32.0" prefWidth="112.0" text="Récupérer" GridPane.columnIndex="3" GridPane.rowIndex="2" />
@@ -407,7 +369,7 @@
                   </GridPane>
                </children>
             </VBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="411.0" prefHeight="46.0" prefWidth="492.0" text="Configuration du PC " textAlignment="CENTER" underline="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="355.0" prefHeight="38.0" prefWidth="492.0" text="Affichage d'information supplémentaires" textAlignment="CENTER" underline="true">
                <font>
                   <Font size="15.0" />
                </font>
