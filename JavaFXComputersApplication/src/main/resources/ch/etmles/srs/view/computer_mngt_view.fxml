@@ -280,6 +280,16 @@
                                    <PropertyValueFactory property="os" />
                                </cellValueFactory>
                            </TableColumn>
+                           <TableColumn fx:id="colIp" text="IP">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="ip" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="colMask" text="MASK">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="mask" />
+                               </cellValueFactory>
+                           </TableColumn>
                        </columns>
                    </TableView>
                   <GridPane>
@@ -364,7 +374,7 @@
                         <Label prefHeight="17.0" prefWidth="117.0" text="Adresse IP" />
                         <TextField fx:id="txtGetIpAddress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" />
                         <TextField fx:id="txtGetMacAddress" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button fx:id="btnGetMac" mnemonicParsing="false" onAction="#onGetButtonClickMac" prefHeight="32.0" prefWidth="112.0" text="Récupérer" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Button fx:id="btnGetMac" mnemonicParsing="false" onAction="#onGetButtonClickMac" prefHeight="32.0" prefWidth="112.0" text="Récupérer" GridPane.columnIndex="3" />
                      </children>
                   </GridPane>
                </children>

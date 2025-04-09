@@ -1,3 +1,0 @@
-Apple;MacbookPro;32;2;1024;MacOS
-Lenovo;T14s;16;1;512;Linux
-Dell;Inspiration;16;1;512;Windows

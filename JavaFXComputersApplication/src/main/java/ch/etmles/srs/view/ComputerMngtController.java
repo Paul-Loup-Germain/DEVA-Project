@@ -62,7 +62,6 @@ public class ComputerMngtController implements Initializable {
     // Déclaration des champs fxml
     @FXML private Circle clePingResult;
     @FXML private Slider spNbCores;
-    @FXML private TextField txtConfigurationMask;
     @FXML private TextField txtGetIpAddress;
     @FXML private TextField txtGetMacAddress;
     @FXML private TextField txtName;
@@ -70,7 +69,6 @@ public class ComputerMngtController implements Initializable {
     @FXML private TextField txtStorage;
     @FXML private TextField txtAddIpAddress;
     @FXML private TextField txtAddMask;
-    @FXML private TextField txtIPAddressConfiguration;
     @FXML private ToggleGroup tgRAMqty;
     @FXML private RadioButton rbRAM8;
     @FXML private ComboBox<String> cbOSChoice;
@@ -81,6 +79,8 @@ public class ComputerMngtController implements Initializable {
     @FXML private TableColumn<Computer, String> colStockage;
     @FXML private TableColumn<Computer, String> colCpu;
     @FXML private TableColumn<Computer, String> colOs;
+    @FXML private TableColumn<Computer, String> colIp;
+    @FXML private TableColumn<Computer, String> colMask;
     @FXML private javafx.scene.image.ImageView imgOsChoice;
 
     // Liste observable contenant des objets Computer.
@@ -102,9 +102,11 @@ public class ComputerMngtController implements Initializable {
         colNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         colModele.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getModel()));
         colRam.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getMemory())));
-        colStockage.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getHDD())));
         colCpu.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getNbProcessors())));
+        colStockage.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getHDD())));
         colOs.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOS()));
+        colIp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIp()));
+        colMask.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMask()));
 
         // Remplit la table avec la liste des ordinateurs (computerList)
         tableView.setItems(computerList);
@@ -142,9 +144,11 @@ public class ComputerMngtController implements Initializable {
                         txtName.getText(),              // Nom de l'ordinateur
                         txtModel.getText(),             // Modèle
                         ram,                            // Quantité de RAM (en Go)
-                        storage,                        // Capacité de stockage (en Go)
                         cores,                          // Nombre de cœurs
-                        (String) cbOSChoice.getValue()  // Système d'exploitation choisi dans la liste déroulante
+                        storage,                        // Capacité de stockage (en Go)
+                        (String) cbOSChoice.getValue(),  // Système d'exploitation choisi dans la liste déroulante
+                        txtAddIpAddress.getText(),
+                        txtAddMask.getText()
                 );
 
                 // Ajouter ce nouvel ordinateur à la liste des ordinateurs
@@ -179,15 +183,6 @@ public class ComputerMngtController implements Initializable {
                 // Met à jour le modèle de l'ordinateur
                 selectedPC.setModel(txtModel.getText());
 
-                // Convertit le texte du champ txtStorage en entier et le stocke dans le disque dur
-                selectedPC.setHDD(Integer.parseInt(txtStorage.getText()));
-
-                // Récupère la valeur du spinner (nombre de cœurs de processeur) et la stocke
-                selectedPC.setNbProcessors((int) spNbCores.getValue());
-
-                // Met à jour le système d'exploitation choisi dans la ComboBox
-                selectedPC.setOS(cbOSChoice.getValue());
-
                 // Récupère le bouton radio sélectionné dans le ToggleGroup pour la RAM
                 RadioButton selectedRAM = (RadioButton) tgRAMqty.getSelectedToggle();
 
@@ -196,6 +191,19 @@ public class ComputerMngtController implements Initializable {
                     // Convertit le texte du bouton (ex. "8") en entier et le stocke
                     selectedPC.setMemory(Integer.parseInt(selectedRAM.getText()));
                 }
+
+                // Récupère la valeur du spinner (nombre de cœurs de processeur) et la stocke
+                selectedPC.setNbProcessors((int) spNbCores.getValue());
+
+                // Convertit le texte du champ txtStorage en entier et le stocke dans le disque dur
+                selectedPC.setHDD(Integer.parseInt(txtStorage.getText()));
+
+                // Met à jour le système d'exploitation choisi dans la ComboBox
+                selectedPC.setOS(cbOSChoice.getValue());
+
+                selectedPC.setIp(txtAddIpAddress.getText());
+
+                selectedPC.setMask(txtAddMask.getText());
 
                 // Rafraîchit la table pour voir les modifications à l'écran
                 tableView.refresh();
@@ -232,7 +240,7 @@ public class ComputerMngtController implements Initializable {
                     String[] data = line.split(";");
 
                     // On vérifie qu’on a bien 6 éléments (nom, modèle, mémoire, nb processeurs, disque dur, OS)
-                    if (data.length == 6) {
+                    if (data.length == 8) {
                         try {
                             // On récupère chaque champ de données et on le convertit si nécessaire
                             String name = data[0];                // Nom de l'ordinateur
@@ -241,9 +249,11 @@ public class ComputerMngtController implements Initializable {
                             int nbProcessors = Integer.parseInt(data[3]);   // Nombre de processeurs
                             int hdd = Integer.parseInt(data[4]);            // Capacité disque dur
                             String os = data[5];                 // Système d’exploitation
+                            String ip = data[6];
+                            String mask = data[7];
 
                             // On crée un nouvel objet Computer avec les données récupérées
-                            Computer pc = new Computer(name, model, memory, nbProcessors, hdd, os);
+                            Computer pc = new Computer(name, model, memory, nbProcessors, hdd, os, ip, mask);
 
                             // On ajoute cet ordinateur à la liste
                             computerList.add(pc);
@@ -287,9 +297,11 @@ public class ComputerMngtController implements Initializable {
                         pc.getName() + ";" +         // Nom de l'ordinateur
                                 pc.getModel() + ";" +        // Modèle
                                 pc.getMemory() + ";" +       // Mémoire RAM
-                                pc.getHDD() + ";" +          // Capacité du disque dur
                                 pc.getNbProcessors() + ";" + // Nombre de processeurs
-                                pc.getOS()                   // Système d'exploitation
+                                pc.getHDD() + ";" +          // Capacité du disque dur
+                                pc.getOS() + ";" +           // Système d'exploitation
+                                pc.getIp() + ";" +
+                                pc.getMask()
                 );
             }
 
@@ -313,15 +325,6 @@ public class ComputerMngtController implements Initializable {
         // Remplit le champ texte du modèle avec le modèle de l'ordinateur
         txtModel.setText(pc.getModel());
 
-        // Convertit l'espace de stockage (en nombre) en texte, puis le place dans le champ texte
-        txtStorage.setText(String.valueOf(pc.getHDD()));
-
-        // Définit la valeur du spinner (ou champ numérique) pour le nombre de processeurs
-        spNbCores.setValue(pc.getNbProcessors());
-
-        // Définit le système d'exploitation sélectionné dans la liste déroulante
-        cbOSChoice.setValue(pc.getOS());
-
         // -------- Gérer la sélection de la RAM avec des boutons radio --------
         // Parcourt tous les boutons radio disponibles dans le groupe tgRAMqty
         for (Toggle toggle : tgRAMqty.getToggles()) {
@@ -339,6 +342,21 @@ public class ComputerMngtController implements Initializable {
                 break;
             }
         }
+
+        // Définit la valeur du spinner (ou champ numérique) pour le nombre de processeurs
+        spNbCores.setValue(pc.getNbProcessors());
+
+        // Convertit l'espace de stockage (en nombre) en texte, puis le place dans le champ texte
+        txtStorage.setText(String.valueOf(pc.getHDD()));
+
+        // Définit le système d'exploitation sélectionné dans la liste déroulante
+        cbOSChoice.setValue(pc.getOS());
+
+        txtAddIpAddress.setText(pc.getIp());
+
+        txtAddMask.setText(pc.getMask());
+
+        txtGetIpAddress.setText(pc.getIp());
     }
 
     // ********************************************************************
@@ -350,7 +368,7 @@ public class ComputerMngtController implements Initializable {
         clePingResult.setFill(Color.BLUE);
 
         // Récupère le texte que l'utilisateur a entré dans le champ de texte (par exemple : une adresse IP)
-        String ipAddress = txtIPAddressConfiguration.getText();
+        String ipAddress = txtAddIpAddress.getText();
 
         // Utilise une méthode "ping" de l'objet "myNetworkCard" pour tester si l'adresse IP est joignable
         String result = myNetworkCard.ping(ipAddress);
@@ -376,10 +394,10 @@ public class ComputerMngtController implements Initializable {
     public void onCalculateSubnetButtonClick(ActionEvent event) {
 
         // Récupère l'adresse IP saisie dans le champ de texte de l'interface graphique
-        String ipAddress = txtIPAddressConfiguration.getText();
+        String ipAddress = txtAddIpAddress.getText();
 
         // Récupère le masque de sous-réseau saisi par l'utilisateur
-        String mask = txtConfigurationMask.getText();
+        String mask = txtAddMask.getText();
 
         // Applique l'adresse IP et le masque à la "carte réseau" (un objet qui gère les infos réseau)
         myNetworkCard.setIpAddress(ipAddress);
@@ -505,5 +523,7 @@ public class ComputerMngtController implements Initializable {
         txtStorage.clear();
         spNbCores.setValue(1);
         cbOSChoice.getSelectionModel().clearSelection();
+        txtAddIpAddress.clear();
+        txtAddMask.clear();
     }
 }

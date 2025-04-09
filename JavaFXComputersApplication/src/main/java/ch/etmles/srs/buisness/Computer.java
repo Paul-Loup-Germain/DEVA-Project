@@ -15,9 +15,11 @@ public class Computer {
     private int HDD; 
     private String OS;
     private NetworkCard card;
+    private String ip;
+    private String mask;
 
     // Constructeurs
-    public Computer(String name, String model, int memory, int nbProcessors, int HDD, String OS) {
+    public Computer(String name, String model, int memory, int nbProcessors, int HDD, String OS, String ip, String mask) {
         this.name = name;
         this.model = model;
         this.memory = memory;
@@ -25,6 +27,8 @@ public class Computer {
         this.HDD = HDD;
         this.OS = OS;
 		this.card = null;
+        this.ip = ip;
+        this.mask = mask;
     }
 
 	public Computer(String name, String model, int memory, int nbProcessors, int HDD, String OS, NetworkCard card) {
@@ -59,6 +63,12 @@ public class Computer {
     public String getOS() {
         return OS;
     }
+    public String getIp() {
+        return ip;
+    }
+    public String getMask() {
+        return mask;
+    }
 
     // Setters
     public void setCard(NetworkCard card) {
@@ -81,5 +91,11 @@ public class Computer {
     }
     public void setOS(String OS) {
         this.OS = OS;
+    }
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+    public void setMask(String mask) {
+        this.mask = mask;
     }
 }
